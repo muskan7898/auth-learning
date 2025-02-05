@@ -41,7 +41,6 @@ public class JwtService {
 
             //signing
             signedJWT.sign(new MACSigner(createJwtRequest.getSecret().getBytes()));
-
             return new CreateJwtResponse(signedJWT.serialize());
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Failed to create jwt");

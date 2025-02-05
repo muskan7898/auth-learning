@@ -51,10 +51,12 @@ public class AuthenticationService {
     public String login(LoginRequest loginRequest){
         try {
             User user = authenticationRepo.findByUsername(loginRequest.getUsername());
+
             if(user == null){
                 throw new ResponseStatusException(HttpStatus.FORBIDDEN, "no user find for this user name");
             }
-            if(Objects.equals(user.getPassword(), loginRequest.getPassword())){
+
+            if(!Objects.equals(user.getPassword(), loginRequest.getPassword())){
                 throw new ResponseStatusException(HttpStatus.FORBIDDEN, "password did not match");
             }
 
